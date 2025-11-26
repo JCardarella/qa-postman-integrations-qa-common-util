@@ -25,7 +25,7 @@ const test = {
 
         /**
          * Test for a Response Time Ceiling of 5000ms unless specified otherwise
-         * @arg {number} time Response Time Ceiling in Milliseconds
+         * @param {number} time Response Time Ceiling in Milliseconds
          */
         testResponseTime(time = 5000) {
             pm.test(`When making the request, then the response took less than ${time}ms`, function () {
@@ -35,7 +35,7 @@ const test = {
 
         /**
          * Test confirming the properties in the first response
-         * @argeter {string[]} listOfProps List of Properties Names
+         * @param {string[]} listOfProps List of Properties Names
          */
         testAllProperties(listOfProps) {
             pm.test(`When making the request, then the response properties are as expected`, function () {
@@ -94,7 +94,7 @@ const gate = {
         /**
          * Gates an action with a query parameter check. Will not execute if the query parameter isn't found.
          * @param {string} queryParam Parameter Name
-         * @param {lambda} action Executeable lambda given the query parameter exists
+         * @param {() => void} action Executable lambda given the query parameter exists
          */
         paramExists(queryParam, action) {
             if (pm.request.url.query.has(queryParam)) {
@@ -110,7 +110,7 @@ const gate = {
 const util = {
     /**
      * ForEach wrapper for accessing the nodes within a response json, executing a lambda that accepts the node object as input.
-     * @param {function()} action Anonymouse lambda that acts on instances of nodes from a response
+     * @param {(json) => void} action Anonymouse lambda that acts on instances of nodes from a response
      */
     iterateOnResponseNodes(action) {
         pm.response.json().forEach(node => {
